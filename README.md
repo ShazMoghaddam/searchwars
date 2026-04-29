@@ -163,4 +163,4 @@ Edit `lib/theme.dart` — modify `categoryColors` map or `AppColors` constants.
 ---
 
 ## 📄 Licence
-MIT — free to use and modify.
+https://github.com/ShazMoghaddam/searchwars/blob/main/LICENSE

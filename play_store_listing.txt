@@ -1,0 +1,93 @@
+# SearchWars — Play Store Listing Copy
+# Ready to paste into Google Play Console
+
+---
+
+## App name
+SearchWars
+
+---
+
+## Short description (80 chars max)
+Which gets more Google searches? The ultimate trivia game! 🔥
+
+---
+
+## Full description
+
+🎮 SEARCHWARS — The Google Searches Trivia Game
+
+Can you guess which gets searched more on Google?
+McDonald's or KFC? Taylor Swift or Beyoncé?
+Ferrari or Lamborghini? Test your knowledge across
+3,187 questions in 11 categories!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 HOW TO PLAY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+You see two things. Guess which one gets more monthly
+Google searches. Simple to learn, impossible to master!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 3,187 QUESTIONS ACROSS 11 CATEGORIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏅 Sports — F1, Football, Basketball, Tennis, Boxing & MMA
+⭐ Celebrity — Actors, Musicians, Influencers
+🎬 TV, Film & Music — Shows, Movies, Artists
+💻 Tech — Phones, Apps, Companies, AI
+🎮 Gaming — Games, Consoles, Streamers, Esports
+🍔 Food & Drink — Restaurants, Cuisines, Trends
+🌍 Geography — Countries, Cities, Landmarks
+🏛️ History — Events, Figures, Wars, Empires
+🗳️ Politics — Leaders, Parties, Events
+🔬 Science & Nature — Space, Animals, Medicine
+🚗 Automotive — Cars, Brands, Racing
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌟 FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❤️ 3 LIVES — One wrong answer costs a heart.
+   How long can you last?
+
+🏆 HIGH SCORES — Every category saves your personal
+   best. Always something to beat.
+
+🔀 SHUFFLE MODE — Mix all 11 categories into one
+   unpredictable game.
+
+🎨 11 CATEGORY THEMES — Each category has its own
+   colour and feel.
+
+⚡ SMOOTH ANIMATIONS — Card reveals, slide
+   transitions, instant feedback.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🇬🇧 BRITISH-FRIENDLY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Questions include UK content: Greggs vs Nando's,
+Coronation Street vs EastEnders, Glastonbury,
+Premier League, and much more.
+
+No account required. No internet needed to play.
+Download and see how well you really know the internet!
+
+---
+
+## Category
+Trivia
+
+---
+
+## Tags
+trivia, quiz, google, search, pub quiz, general knowledge, higher or lower
+
+---
+
+## Content rating
+Everyone (E)
+
+---
+
+## Privacy policy URL
+https://YOUR-DEPLOYED-URL/privacy.html
+(deploy privacy.html to your Netlify/web host first, then paste the live URL here)

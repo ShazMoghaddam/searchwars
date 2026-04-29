@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "leaderboard": {
+      // Anyone can read the leaderboard
+      ".read": true,
+
+      "$entry_id": {
+        // Allow writes only if the data is valid
+        ".write": "!data.exists() || auth == null",
+        ".validate": "newData.hasChildren(['name', 'score', 'category', 'timestamp'])
+                      && newData.child('name').isString()
+                      && newData.child('name').val().length >= 1
+                      && newData.child('name').val().length <= 20
+                      && newData.child('score').isNumber()
+                      && newData.child('score').val() >= 0
+                      && newData.child('score').val() <= 200
+                      && newData.child('category').isString()
+                      && newData.child('timestamp').isNumber()",
+
+        // Prevent adding extra unknown fields
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

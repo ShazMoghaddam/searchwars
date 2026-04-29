@@ -1,0 +1,37 @@
+name: searchwars
+description: SearchWars — Which gets more Google searches?
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.2.2   # High score persistence
+  http: ^1.2.1                  # Reserved for future API calls (leaderboard etc.)
+  share_plus: ^7.2.2            # Share score / results
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1  # Auto-generates all Android/iOS icon sizes
+
+# ── Launcher icon config ─────────────────────────────────────────────────────
+# Run:  flutter pub run flutter_launcher_icons
+# This reads your source image and writes all mipmap densities automatically.
+flutter_launcher_icons:
+  android: true
+  ios: false                    # set true if you add an iOS build later
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#1A1E33"
+  adaptive_icon_foreground: "assets/icons/app_icon_foreground.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/data/dataset.json
+    - assets/icons/app_icon.png
+    - assets/icons/app_icon_foreground.png

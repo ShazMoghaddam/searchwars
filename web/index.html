@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+
+  <!-- PWA Meta -->
+  <meta name="apple-mobile-web-app-capable"           content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style"  content="black-translucent">
+  <meta name="apple-mobile-web-app-title"             content="SearchWars">
+  <meta name="mobile-web-app-capable"                 content="yes">
+  <meta name="theme-color"                            content="#1A1E33">
+  <meta name="description"
+        content="Which gets more Google searches? Play SearchWars — the ultimate trivia game!">
+
+  <!-- Open Graph (for sharing) -->
+  <meta property="og:title"       content="SearchWars">
+  <meta property="og:description" content="Which gets more Google searches? 3,187 questions across 11 categories.">
+  <meta property="og:image"       content="/icon_512.png">
+  <meta property="og:type"        content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="SearchWars">
+  <meta name="twitter:description" content="Which gets more Google searches?">
+  <meta name="twitter:image"       content="/icon_512.png">
+
+  <!-- Icons -->
+  <link rel="icon"             type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="192x192"  href="favicon.png">
+  <link rel="manifest"                          href="manifest.json">
+
+  <title>SearchWars</title>
+
+  <style>
+    body {
+      background-color: #1A1E33;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* iOS install prompt hint */
+    #pwa-hint {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #242840;
+      color: #F2F3FF;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 12px 20px;
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      text-align: center;
+      max-width: 300px;
+      z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      animation: slideUp 0.4s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+      to   { transform: translateX(-50%) translateY(0);   opacity: 1; }
+    }
+    #pwa-hint .close {
+      float: right;
+      cursor: pointer;
+      opacity: 0.6;
+      margin-left: 12px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- iOS Install Hint (shown only on Safari + not standalone) -->
+  <div id="pwa-hint">
+    <!--
+      Clicking X sets the permanent dismissed flag.
+      Simply closing the tab does NOT dismiss it — user gets another chance next visit.
+    -->
+    <span class="close" onclick="
+      document.getElementById('pwa-hint').style.display='none';
+      localStorage.setItem('pwa-hint-dismissed', '1');
+    ">✕</span>
+    📲 Install SearchWars — tap <strong>Share</strong> then
+    <strong>Add to Home Screen</strong>
+  </div>
+
+  <script>
+    // ── Service Worker ────────────────────────────────────────────────────────
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+          console.log('[SW] Registered');
+        }).catch(console.warn);
+      });
+    }
+
+    // ── iOS Install Hint ──────────────────────────────────────────────────────
+    // Logic:
+    //   - Track visit count across sessions
+    //   - Show the hint from the 2nd visit onwards (user has seen the app, more likely to install)
+    //   - Only permanently dismiss when the user explicitly clicks ✕
+    //   - Closing the tab / navigating away does NOT dismiss — they get another chance
+    (function() {
+      const isIOS       = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isStandalone = window.navigator.standalone === true;
+      const hasDismissed = localStorage.getItem('pwa-hint-dismissed');
+
+      if (!isIOS || isStandalone || hasDismissed) return;
+
+      // Increment visit counter
+      const visits = parseInt(localStorage.getItem('pwa-visits') || '0') + 1;
+      localStorage.setItem('pwa-visits', visits);
+
+      // Show from 2nd visit onwards, with a short delay so the app has loaded
+      if (visits >= 2) {
+        setTimeout(() => {
+          document.getElementById('pwa-hint').style.display = 'block';
+        }, 4000);
+      }
+    })();
+
+    // ── Android "Add to Home Screen" prompt ───────────────────────────────────
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      // To trigger manually: deferredPrompt.prompt()
+      // Useful if you add an "Install App" button in the Flutter UI
+    });
+  </script>
+
+  <script>
+    // ── Web Audio ─────────────────────────────────────────────────────────────
+    // Called from Flutter via JS interop for sound effects
+    window.playSearchWarsNote = function(freq, dur, type) {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var o = ctx.createOscillator();
+        var g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.type = type; o.frequency.value = freq;
+        g.gain.setValueAtTime(0, ctx.currentTime);
+        g.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+        o.start(); o.stop(ctx.currentTime + dur + 0.05);
+      } catch(e) {}
+    };
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
